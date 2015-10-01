@@ -25,7 +25,9 @@ namespace OdeToFood.Controllers
             
             //-- w/ RedirectToRoute we don't pass controller and action name as parameters,
             //rather we pass them as anonymously typed object.
-            return RedirectToRoute("Default", new {controller = "Home", action = "About"});
+            
+            //Let's say we want to return site stylesheet
+            return File(Server.MapPath("~/Content/site.css"),"text/css");
         }
 
     }
