@@ -23,8 +23,9 @@ namespace OdeToFood.Controllers
             //Permanent redirect
             //return RedirectPermanent("http://microsoft.com");
             
-            //Temporary redirect - it works w/ Routing Engine
-            return RedirectToAction("Index", "Home",new{name=name});
+            //-- w/ RedirectToRoute we don't pass controller and action name as parameters,
+            //rather we pass them as anonymously typed object.
+            return RedirectToRoute("Default", new {controller = "Home", action = "About"});
         }
 
     }
