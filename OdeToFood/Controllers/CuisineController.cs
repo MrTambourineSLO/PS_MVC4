@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 
 namespace OdeToFood.Controllers
 {
@@ -16,18 +17,18 @@ namespace OdeToFood.Controllers
         //in routing data, query string and posted form values
 
         //Here it will see that /cuisine/name is the value we want
-        public ActionResult Search(string name)
+        //Action Verb: HttpPost
+        [HttpPost]
+        public ActionResult Search(string name ="Slovenian")
         {
             var message = Server.HtmlEncode(name);
-            //return Content(name);
-            //Permanent redirect
-            //return RedirectPermanent("http://microsoft.com");
-            
-            //-- w/ RedirectToRoute we don't pass controller and action name as parameters,
-            //rather we pass them as anonymously typed object.
-            
-            //Let's say we want to return site stylesheet
-            return File(Server.MapPath("~/Content/site.css"),"text/css");
+            return Content(message);
+        }
+        //Action Verb: HttpGet
+        [HttpGet]
+        public ActionResult Search()
+        {
+            return Content("Search!");
         }
 
     }
