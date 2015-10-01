@@ -7,6 +7,7 @@ using System.Web.Services.Description;
 
 namespace OdeToFood.Controllers
 {
+    
     public class CuisineController : Controller
     {
         //
@@ -16,20 +17,19 @@ namespace OdeToFood.Controllers
         //ASP will try it's best to find the relevant data
         //in routing data, query string and posted form values
 
-        //Here it will see that /cuisine/name is the value we want
-        //Action Verb: HttpPost
-        [HttpPost]
+        //Eg: User has to be admin
+        //[Authorize(Roles = "Admin")]
+        //User has to be logged in:
+        
+
         public ActionResult Search(string name ="Slovenian")
         {
+            throw new Exception("Something terrible has happened.");
             var message = Server.HtmlEncode(name);
             return Content(message);
         }
         //Action Verb: HttpGet
-        [HttpGet]
-        public ActionResult Search()
-        {
-            return Content("Search!");
-        }
+        
 
     }
 }
