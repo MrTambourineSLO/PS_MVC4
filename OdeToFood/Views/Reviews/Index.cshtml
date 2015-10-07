@@ -10,11 +10,7 @@
 <h2>The latest reviews</h2>
 @foreach (var item in Model)
 {
-    <div class="review">
-        <h4>@item.Name</h4>
-        <span>@item.Rating</span>
-        <p>@item.City, @item.Country</p>
-    </div>
+    @Html.Partial("_Review",item);
 }
 
 <p>
