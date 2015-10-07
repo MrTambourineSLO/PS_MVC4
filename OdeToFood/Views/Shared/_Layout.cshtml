@@ -29,12 +29,21 @@
                 </div>
             </div>
         </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
-        </div>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+    <div>
+        <!--We're making SUBREQUEST that can go out
+        and call another controller action w/ it's
+        own model and render it's own partial view -->
+
+        <!--Essentially go and call BestReview action
+            on the Reviews controller and place result here-->
+        @Html.Action("BestReview","Reviews");
+    </div>
         <footer>
             <div class="content-wrapper">
                 <div class="float-left">
