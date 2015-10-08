@@ -9,18 +9,13 @@ namespace OdeToFood.Controllers
 {
     public class HomeController : Controller
     {
+        //1st we INSTANTIATE OdeToFoodDb
+        OdeToFoodDb _db = new OdeToFoodDb();
         public ActionResult Index()
         {
-            var controller = RouteData.Values["controller"];
-            var action = RouteData.Values["action"];
-            var id = RouteData.Values["id"];
-
-            var message = String.Format("{0}::{1} {2}", controller, action, id);
-            ViewBag.Message = message;
-
-            
-
-            return View();
+            //We retrieve all restaurants from Restaurants
+            var model = _db.Restaurants.ToList();
+            return View(model);
         }
 
         public ActionResult About()
@@ -37,6 +32,18 @@ namespace OdeToFood.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+        //Since this is a disposable resource we should override 
+        //DISPOSE - Dispose API in .NET is just a way to clean
+        //up resources that may be open
+        protected override void Dispose(bool disposing)
+        {
+            if (_db != null)
+            {
+                _db.Dispose();
+                
+            }
+            base.Dispose(disposing);
         }
     }
 }
