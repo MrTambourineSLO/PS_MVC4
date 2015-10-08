@@ -26,7 +26,7 @@ namespace OdeToFood.Migrations
                     Name = "Smaka", City = "Gotenburg", Country = "Sweden",
                     Reviews = new List<RestaurantReview>
                     {
-                        new RestaurantReview{Rating = 9, Body = "Great Food!"}
+                        new RestaurantReview{Rating = 9, Body = "Great Food!",Reviewer = "Scott"}
                     }
                 });
         }
