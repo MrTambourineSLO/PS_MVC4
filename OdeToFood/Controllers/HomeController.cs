@@ -15,10 +15,19 @@ namespace OdeToFood.Controllers
         {
             //We retrieve all restaurants from Restaurants
             
+            //Select restaurant based on average review
             var model =
                 from r in _db.Restaurants
-                orderby r.Name ascending
-                select r;
+                orderby r.Reviews.Average(review => review.Rating) descending 
+                select new RestaurantListViewModel
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    City = r.City,
+                    Country = r.Country,
+                    //Anon type - to add the reviews which arent in this model
+                    CountOfReviews = r.Reviews.Count()
+                };
             
             return View(model);
         }
