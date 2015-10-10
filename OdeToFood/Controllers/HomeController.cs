@@ -14,7 +14,12 @@ namespace OdeToFood.Controllers
         public ActionResult Index()
         {
             //We retrieve all restaurants from Restaurants
-            var model = _db.Restaurants.ToList();
+            
+            var model =
+                from r in _db.Restaurants
+                orderby r.Name ascending
+                select r;
+            
             return View(model);
         }
 
