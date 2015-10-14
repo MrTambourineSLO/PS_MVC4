@@ -2,6 +2,15 @@
 @{
     ViewBag.Title = "Home Page";
 }
+<!--In form is there is no action specified for GET method
+it will return to action it came from which is to say the 
+    same page (index action of home controller).-->
+<form method="GET">
+    <!--name parameter of input has to be the same as name of 
+        argument in action method-->
+    <input type="search" name="searchTerm"/>
+    <input type="submit" value="Search by name"/>
+</form>
 @foreach (var item in Model)
 {
     <div>
