@@ -22,19 +22,6 @@ namespace OdeToFood.Controllers
         }
 
         //
-        // GET: /Restaurant/Details/5
-
-        public ActionResult Details(int id = 0)
-        {
-            Restaurant restaurant = db.Restaurants.Find(id);
-            if (restaurant == null)
-            {
-                return HttpNotFound();
-            }
-            return View(restaurant);
-        }
-
-        //
         // GET: /Restaurant/Create
 
         public ActionResult Create()

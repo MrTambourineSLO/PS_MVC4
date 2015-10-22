@@ -35,8 +35,10 @@
             @Html.DisplayFor(modelItem => item.Country)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+            <!--Null at the end is only necessary so that there is correct
+                overload of ActionLink method used -->
+            @Html.ActionLink("Reviews", "Index", "Reviews", new { id=item.Id },null) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
