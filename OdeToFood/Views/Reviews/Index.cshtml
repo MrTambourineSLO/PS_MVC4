@@ -5,7 +5,8 @@
 }
 
 <h2>Reviews for @Model.Name</h2>
-
+<!-- We insert partial view and pass it our model-->
+@Html.Partial("_Reviews",@Model.Reviews)
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
