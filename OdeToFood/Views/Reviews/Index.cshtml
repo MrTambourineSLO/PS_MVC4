@@ -1,4 +1,5 @@
-﻿@model OdeToFood.Models.Restaurant
+﻿@using OdeToFood.Models
+@model OdeToFood.Models.Restaurant
 
 @{
     ViewBag.Title = "Index";
@@ -8,6 +9,6 @@
 <!-- We insert partial view and pass it our model-->
 @Html.Partial("_Reviews",@Model.Reviews)
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", new {restaurantId = Model.Id})
 </p>
 

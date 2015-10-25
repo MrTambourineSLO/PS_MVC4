@@ -25,6 +25,12 @@ namespace OdeToFood.Controllers
             }
             return HttpNotFound();
         }
+
+        [HttpGet]
+        public ActionResult Create(int restaurantId)
+        {
+            return View();
+        }
         //We have to implement Dispose method
         protected override void Dispose(bool disposing)
         {
