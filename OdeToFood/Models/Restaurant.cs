@@ -13,6 +13,6 @@ namespace OdeToFood.Models
         public string Country { get; set; }
         //Each restaurant can have multiple 
         //associated reviews
-        public ICollection<RestaurantReview> Reviews { get; set; } 
+        public virtual ICollection<RestaurantReview> Reviews { get; set; } 
     }
 }
