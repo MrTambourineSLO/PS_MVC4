@@ -9,16 +9,27 @@ namespace OdeToFood.Controllers
 {
     public class ReviewsController : Controller
     {
-        
+        //Data source 
+        OdeToFoodDb _db = new OdeToFoodDb();
 
-        public ActionResult Index()
+        //This id parameter is not review id but
+        //restaurant id
+        //We use Bind attribute to let model binder know that
+        //"restaurantId" is a n alias for id
+        public ActionResult Index([Bind(Prefix = "id")]int restaurantId)
         {
-            var model = from r in _reviews
-                orderby r.Country
-                select r;
-
-
-            return View(model);
+            var restaurant = _db.Restaurants.Find(restaurantId);
+            if (restaurant != null)
+            {
+                return View(restaurant);
+            }
+            return HttpNotFound();
+        }
+        //We have to implement Dispose method
+        protected override void Dispose(bool disposing)
+        {
+            _db.Dispose();
+            base.Dispose(disposing);
         }
     }
 
