@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -41,6 +42,26 @@ namespace OdeToFood.Controllers
                 return RedirectToAction("Index", new {id = review.RestaurantId});
             }
             /*If something went wrong return back to form*/
+            return View(review);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var model = _db.Review.Find(id);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Edit(RestaurantReview review)
+        {
+            if (ModelState.IsValid)
+            {
+                //Entry tells which review to keep tracking in order to
+                //make changes
+                _db.Entry(review).State = EntityState.Modified;
+                _db.SaveChanges();
+                return RedirectToAction("Index", new {id = review.RestaurantId});
+            }
             return View(review);
         }
         //We have to implement Dispose method
