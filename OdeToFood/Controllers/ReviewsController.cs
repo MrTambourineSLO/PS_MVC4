@@ -31,6 +31,18 @@ namespace OdeToFood.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult Create(RestaurantReview review)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Review.Add(review);
+                _db.SaveChanges();
+                return RedirectToAction("Index", new {id = review.RestaurantId});
+            }
+            /*If something went wrong return back to form*/
+            return View(review);
+        }
         //We have to implement Dispose method
         protected override void Dispose(bool disposing)
         {
