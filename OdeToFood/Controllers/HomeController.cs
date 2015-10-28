@@ -28,6 +28,10 @@ namespace OdeToFood.Controllers
 
                 }
                 );
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Restaurants", model);
+            }
 
 
             return View(model);
