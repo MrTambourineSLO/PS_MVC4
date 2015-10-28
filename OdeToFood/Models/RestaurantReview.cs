@@ -7,7 +7,7 @@ using System.Web;
 namespace OdeToFood.Models
 {
    
-    public class RestaurantReview
+    public class RestaurantReview : IValidatableObject
     {
         public int Id { get; set; }
         /*Data annotation for range*/
@@ -24,5 +24,14 @@ namespace OdeToFood.Models
         [DisplayFormat(NullDisplayText = "Anonymous")]
         public string Reviewer { get; set; }
         public int RestaurantId { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Rating < 2 && Reviewer.ToLower().StartsWith("saso"))
+            {
+                /*Otherwise it will produce empty IEnumerable*/
+                yield return new ValidationResult("Sorry Saso, you can't do this");
+            }
+        }
     }
 }
