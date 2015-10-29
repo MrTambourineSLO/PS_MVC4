@@ -30,6 +30,7 @@ $(function () {
             var $target = $($form.attr("data-otf-target"));
             var $newHtml = $(data);
             $target.replaceWith($newHtml);
+            $newHtml.effect("highlight");
         });
         //Prevent browser from navigating away, going to the server and
         //redrawing the page (it's default action)
