@@ -13,16 +13,23 @@ it will return to action it came from which is to say the
         <input type="submit" value="Search by name"/>
     </form>
 *@
-
-@using (Ajax.BeginForm(
-    new AjaxOptions
+@*
+    @using (Ajax.BeginForm(
+        new AjaxOptions
+        {
+            HttpMethod = "get",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "restaurantList"
+        }))
     {
-        HttpMethod = "get",
-        InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "restaurantList"
-    }))
-{
+        <input type="search" name="searchTerm"/>
+        <input type="submit" value="Search By Name"/>
+    }
+*@
+<form method="GET" action="@Url.Action("Index")"
+        data-otf-ajax="true" data-otf-target="#restaurantList">
     <input type="search" name="searchTerm"/>
-    <input type="submit" value="Search By Name"/>
-}
+    <input type="submit" value="Search by name"/>
+
+</form>
 @Html.Partial("_Restaurants",Model)
