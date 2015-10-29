@@ -58,10 +58,35 @@ $(function () {
         };
         $input.autocomplete(options);
     };
+    var getPage = function() {
+        //anchor that the user clicked on
+        var $a = $(this);
+
+        //Extract values from anchor
+        var options = {
+            url: $a.attr("href"),
+            //Add aditional data so we know if user has input in search!
+            data: $("form").serialize(),
+            type: "get"
+        };
+        //When ajax req to get options above is done
+        //Call function
+        $.ajax(options).done(function(data) {
+            //Thing that we need to update (ie restaurant list) but we're doing it in a
+            //generic fashion
+            var target = $a.parents("div.pagedList").attr("data-otf-target");
+            //Replace it w/ fresh data from the server
+            $(target).replaceWith(data);
+        });
+        return false;
+    };
 
     /*Select all forms with this attribute set to true*/
     /*After that when user clicks submit, instead of going back to the server*/
     /*it will come into my JS code (ie call function ajaxFormSubmit*/
     $("form[data-otf-ajax='true']").submit(ajaxFormSubmit);
     $("input[data-otf-autocomplete]").each(createAutocomplete);
+    //Intercepting clicks on paged list
+    $(".main-content").on("click", ".pagedList a", getPage);
+
 });
