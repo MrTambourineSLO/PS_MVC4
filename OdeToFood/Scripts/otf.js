@@ -35,7 +35,14 @@ $(function () {
         //redrawing the page (it's default action)
         return false;
     };
-
+    //Ui is param that autocomplete passes in -see documentation
+    var submitAutocompleteForm = function(event,ui) {
+        var $input = $(this);//again - this will point to what DOM el we're interacting w/
+        $input.val(ui.item.label);//Manually select input value (to make sure)
+        //Find the form via parent and submit it
+        var $form = $input.parents("form:first");
+        $form.submit();
+    };
     var createAutocomplete = function() {
         //For each input that it finds with data-otf-autocomplete attrib.
         //it will invoke this function and pass along that single input as
@@ -44,7 +51,9 @@ $(function () {
         var options = {
             //Source option is only necessary it tells autocomplete where to
             //get the data
-            source: $input.attr("data-otf-autocomplete")
+            source: $input.attr("data-otf-autocomplete"),
+            //When user selects something from dropdown call a function ....
+            select: submitAutocompleteForm
         };
         $input.autocomplete(options);
     };
