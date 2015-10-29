@@ -19,7 +19,7 @@ $(function () {
             //Data to send along to the server
             //IE collect whatever is submitted and put it into
             //key/value pairs
-            data: $form.attr.serialize()
+            data: $form.serialize()
         };
         //Once we have the options - we need to make async call
         //$.ajax is one of the ways to make async call back to the server
@@ -28,16 +28,30 @@ $(function () {
         $.ajax(options).done(function(data) {
             //What is DOM element on the page we want to update?
             var $target = $($form.attr("data-otf-target"));
-            $target.replaceWith(data);
+            var $newHtml = $(data);
+            $target.replaceWith($newHtml);
         });
         //Prevent browser from navigating away, going to the server and
         //redrawing the page (it's default action)
         return false;
     };
 
+    var createAutocomplete = function() {
+        //For each input that it finds with data-otf-autocomplete attrib.
+        //it will invoke this function and pass along that single input as
+        //the $(this) reference [$input - dollar sign is only to allow JQ functionality]
+        var $input = $(this);
+        var options = {
+            //Source option is only necessary it tells autocomplete where to
+            //get the data
+            source: $input.attr("data-otf-autocomplete")
+        };
+        $input.autocomplete(options);
+    };
+
     /*Select all forms with this attribute set to true*/
     /*After that when user clicks submit, instead of going back to the server*/
     /*it will come into my JS code (ie call function ajaxFormSubmit*/
-    $("form[data-otf-ajax='true]").submit(ajaxFormSubmit);
-
+    $("form[data-otf-ajax='true']").submit(ajaxFormSubmit);
+    $("input[data-otf-autocomplete]").each(createAutocomplete);
 });

@@ -12,6 +12,34 @@ namespace OdeToFood.Controllers
         //1st we INSTANTIATE OdeToFoodDb
         OdeToFoodDb _db = new OdeToFoodDb();
         //We add search term to controller
+        /*
+         JQ documentation on Autocomplete tells us that when the user
+         * is typing it will send a request to the server and include
+         * the parameter in the request called "term"
+         */
+        public ActionResult Autocomplete(string term)
+        {
+            /*I take term sent from JQ and query DB w/ it*/
+            var model =
+                //Give us restaurants
+                _db.Restaurants
+                //where the name of restaurants starts with term
+                    .Where(r => r.Name.StartsWith(term))
+                    //Limit result set to first 10
+                    .Take(10)
+                    //We do projection w/ select ie
+                    //return every restaurant into an object
+                    .Select(r => new
+                    {
+                        //that has a label property and that label prop
+                        //will turn into restaurant's name (label, value etc are
+                        //required by JQ
+                        label = r.Name
+                    });
+            //We put that into JSON format
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        
         public ActionResult Index(string searchTerm = null)
         {
        
