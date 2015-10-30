@@ -19,5 +19,7 @@ namespace OdeToFood.Models
          * the entities we want to query and PERSIST*/
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<RestaurantReview> Review { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
+
     }
 }

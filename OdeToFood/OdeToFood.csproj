@@ -194,7 +194,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Controllers\ReviewsController.cs" />
-    <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -210,6 +209,7 @@
     <Compile Include="Models\Restaurant.cs" />
     <Compile Include="Models\RestaurantListViewModel.cs" />
     <Compile Include="Models\RestaurantReview.cs" />
+    <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
