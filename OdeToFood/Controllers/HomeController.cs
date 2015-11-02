@@ -8,8 +8,10 @@ using PagedList;
 
 namespace OdeToFood.Controllers
 {
+    [Authorize(Roles = "administrators, sales")]
     public class HomeController : Controller
     {
+
         //1st we INSTANTIATE OdeToFoodDb
         OdeToFoodDb _db = new OdeToFoodDb();
         //We add search term to controller
@@ -40,7 +42,7 @@ namespace OdeToFood.Controllers
             //We put that into JSON format
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-        
+        [AllowAnonymous]
         public ActionResult Index(string searchTerm = null, int page = 1)
         {
 
@@ -65,7 +67,11 @@ namespace OdeToFood.Controllers
 
             return View(model);
         }
-
+        /*Authorize attribute w/o parameters says:
+         * "Only authenticated users are authorized to
+         * invoke this controller action
+         */
+        
         public ActionResult About()
         {
             var model = new AboutModel();
