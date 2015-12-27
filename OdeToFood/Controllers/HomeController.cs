@@ -8,7 +8,7 @@ using PagedList;
 
 namespace OdeToFood.Controllers
 {
-    [Authorize(Roles = "administrators, sales")]
+   
     public class HomeController : Controller
     {
 
@@ -42,7 +42,7 @@ namespace OdeToFood.Controllers
             //We put that into JSON format
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-        [AllowAnonymous]
+        
         public ActionResult Index(string searchTerm = null, int page = 1)
         {
 
