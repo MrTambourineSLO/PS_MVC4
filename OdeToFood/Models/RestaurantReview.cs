@@ -14,7 +14,7 @@ namespace OdeToFood.Models
         [Range(1,10)]
         /*Required is redundant, value types cannot
          be left null!*/
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(OdeToFood.Views.Home.Resources), ErrorMessageResourceName = "Greeting")]
         public int Rating { get; set; }
         //For storing text
         [Required]
