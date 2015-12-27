@@ -42,7 +42,8 @@ namespace OdeToFood.Controllers
             //We put that into JSON format
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-        
+
+        [OutputCache(Duration = 60)]
         public ActionResult Index(string searchTerm = null, int page = 1)
         {
 
