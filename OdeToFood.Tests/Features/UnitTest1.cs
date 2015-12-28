@@ -47,6 +47,17 @@ namespace OdeToFood.Tests.Features
 
             Assert.AreEqual(6, result.Rating);
         }
+
+        [TestMethod]
+        public void Weighted_Average_For_Two_Reviews()
+        {
+            var data = BuildRestaurantsAndReviews(3,9);
+
+            var rater = new RestaurantRater(data);
+            var result = rater.ComputeWeightedRate(10);
+
+            Assert.AreEqual(5, result.Rating);
+        }
         //Warning: Below is a HELPER method, not a TEST method
         private Restaurant BuildRestaurantsAndReviews(params int[] ratings)
         {

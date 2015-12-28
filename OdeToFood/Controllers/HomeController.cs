@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -61,6 +62,8 @@ namespace OdeToFood.Controllers
 
                 }
                 ).ToPagedList(page, 10);
+            
+            ViewBag.MailServer = ConfigurationManager.AppSettings["MailServer"];
             if (Request.IsAjaxRequest())
             {
                 return PartialView("_Restaurants", model);
