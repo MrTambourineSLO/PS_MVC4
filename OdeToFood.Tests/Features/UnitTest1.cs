@@ -22,7 +22,7 @@ namespace OdeToFood.Tests.Features
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void Computes_Result_For_One_Review()
         {
             //First we need a restaurant
             var data = new Restaurant();
@@ -37,6 +37,20 @@ namespace OdeToFood.Tests.Features
 
             //Assert the result
             Assert.AreEqual(4,result.Rating);
+        }
+
+        [TestMethod]
+        public void Computes_Result_For_Two_Reviews()
+        {
+            var data = new Restaurant();
+            data.Reviews = new List<RestaurantReview>();
+            data.Reviews.Add(new RestaurantReview(){Rating = 4});
+            data.Reviews.Add(new RestaurantReview() { Rating = 8 });
+
+            var rater = new RestaurantRater(data);
+            var result = rater.ComputeRating(10);
+
+            Assert.AreEqual(6, result.Rating);
         }
     }
 }
