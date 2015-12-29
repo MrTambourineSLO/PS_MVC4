@@ -16,7 +16,7 @@ namespace OdeToFood.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(OdeToFood.Models.OdeToFoodDb context)
@@ -33,26 +33,22 @@ namespace OdeToFood.Migrations
                         new RestaurantReview{Rating = 9, Body = "Great Food!",Reviewer = "Scott"}
                     }
                 });
-            for (int i = 0; i < 1000; i++)
-            {
-                context.Restaurants.AddOrUpdate(r=>r.Name,
-                    new Restaurant
-                    {
-                        Name = i.ToString(),
-                        City = "Nowhere",
-                        Country = "USA"
-                    });
-            }
+       
             SeedMembership();
         }
 
         private void SeedMembership()
         {
-            //We init db connection to make sure everything is setup and schema is in place for the 
-            //SimpleMembershipProvider
+            //Just make sure web security isn't initialized already
+            if (!WebSecurity.Initialized)
+            {
+                //We init db connection to make sure everything is setup and schema is in place for the 
+                //SimpleMembershipProvider
+                WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId",
+                    "UserName", autoCreateTables: true);
+                
+            }
             
-            WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile","UserId",
-                "UserName", autoCreateTables:true);
             
             //Get access for the current role provider and current membership provider
             var roles = (SimpleRoleProvider)Roles.Provider;
